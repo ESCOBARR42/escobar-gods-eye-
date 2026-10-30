@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08090d">
+<title>ESC0BAR // GOD'S EYE</title>
+<style>
+:root{--bg:#08090d;--panel:#10131b;--line:#292e3b;--red:#ff304d;--cyan:#5ce6ff;--muted:#8992a4;--green:#7dffb0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,#1b1018 0,#08090d 48%);color:#e9edf5;font:14px/1.45 Inter,system-ui,Arial,sans-serif;letter-spacing:.02em}
+header{display:flex;align-items:center;justify-content:space-between;padding:17px 22px;border-bottom:1px solid var(--line);background:#090a0fdc;position:sticky;top:0;z-index:4;backdrop-filter:blur(12px)}
+.brand{font-weight:900;letter-spacing:.16em}.brand b{color:var(--red)}.sub{font-size:10px;color:var(--muted);letter-spacing:.22em;margin-top:3px}
+.status{color:var(--green);font-size:11px;letter-spacing:.12em}.status:before{content:"";display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:8px;box-shadow:0 0 12px var(--green)}
+main{max-width:1450px;margin:auto;padding:22px;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(280px,.8fr);gap:16px}
+.panel{background:linear-gradient(145deg,#121620,#0c0f16);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 12px 40px #0005}
+.panelhead{padding:13px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.15em;color:#b9c1d0}
+.tag{font-size:9px;color:var(--red);border:1px solid #873041;padding:3px 7px;border-radius:3px}
+.map{height:440px;position:relative;overflow:hidden;background-color:#0a1118;background-image:linear-gradient(#1b344033 1px,transparent 1px),linear-gradient(90deg,#1b344033 1px,transparent 1px),radial-gradient(ellipse at 51% 48%,#17313a 0,#101b24 45%,#0a1118 75%);background-size:36px 36px,36px 36px,auto}
+.world{position:absolute;inset:0;opacity:.45;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 500'%3E%3Cg fill='%23264a50' stroke='%233d777b' stroke-width='2'%3E%3Cpath d='M70 110l55-35 80 8 34 35-18 30-44 9-20 38-49-10-29-37zm150 130l48-30 52 13 30 50-22 68-39 40-30-27-10-56zm150-210l70-18 65 25 38 48-30 40-65-12-35 25-50-30zm100 180l55-36 80 10 35 45-30 48-60 4-20 54-42-24-10-52zm190-145l72-28 92 22 47 48-29 31-75-8-42 28-48-31z'/%3E%3C/g%3E%3C/svg%3E");background-size:100% 100%;filter:drop-shadow(0 0 10px #45d5df22)}
+.scan{position:absolute;inset:-30%;background:conic-gradient(from 0deg,transparent 0 78%,#ff304d20 88%,#ff304d80 90%,transparent 91%);animation:spin 8s linear infinite;border-radius:50%;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring{position:absolute;width:230px;height:230px;border:1px solid #ff304d70;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);box-shadow:0 0 35px #ff304d18,inset 0 0 35px #ff304d10}
+.ring:before,.ring:after{content:"";position:absolute;border:1px solid #ff304d40;border-radius:50%;inset:28px}.ring:after{inset:70px}
+.cross{position:absolute;left:50%;top:50%;width:330px;height:1px;background:#ff304d38;transform:translate(-50%,-50%)}.cross:after{content:"";position:absolute;height:330px;width:1px;background:#ff304d38;left:50%}
+.pin{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 5px #ff304d24,0 0 18px var(--red);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 10px #ff304d08,0 0 22px var(--red)}}
+.coordinates{position:absolute;bottom:14px;left:15px;color:#9aa7b6;font:10px monospace;line-height:1.8}.maplabel{position:absolute;right:15px;top:15px;color:#ff6b7e;font:10px monospace;text-align:right}
+.mapnote{position:absolute;bottom:14px;right:15px;color:#9aa7b6;font-size:10px;text-align:right}
+.side{display:grid;gap:16px;align-content:start}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:13px}
+.metric{padding:12px;background:#0b0e14;border:1px solid #222a36;border-radius:8px}.metric small{display:block;color:var(--muted);font-size:9px;letter-spacing:.12em}.metric strong{font-size:22px;display:block;margin-top:5px}
+.search{padding:14px;display:flex;gap:8px}input{min-width:0;flex:1;background:#080b11;border:1px solid #343b4b;color:white;padding:11px;border-radius:6px;outline:none}input:focus{border-color:var(--red)}button{background:var(--red);border:0;color:white;font-weight:800;letter-spacing:.08em;padding:0 15px;border-radius:6px;cursor:pointer}
+.result{padding:0 14px 14px;color:var(--muted);font-size:11px;min-height:25px}
+.events{padding:5px 15px 14px}.event{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #202633;font-size:11px}.event:last-child{border:0}.dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);margin-top:5px;flex:none}.event span{color:var(--muted);display:block;font-size:10px}
+footer{text-align:center;color:#626c7d;font-size:10px;padding:8px 20px 25px;letter-spacing:.08em}
+.notice{margin:0 22px 20px;padding:11px 14px;border:1px solid #6b5230;background:#211a10;color:#d8c49d;border-radius:8px;font-size:11px;max-width:1406px;margin-left:auto;margin-right:auto}
+@media(max-width:850px){main{grid-template-columns:1fr;padding:12px}.map{height:350px}header{padding:14px}.notice{margin:0 12px 15px}}
+@media(max-width:420px){.map{height:300px}.ring{width:190px;height:190px}.cross{width:260px}.cross:after{height:260px}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">ESC<span style="color:#fff">0</span>BAR <b>// GOD'S EYE</b></div><div class="sub">GLOBAL INTERFACE • DEMO BUILD 01</div></div><div class="status">SYSTEM ONLINE</div></header>
+<main>
+<section class="panel">
+ <div class="panelhead"><span>GLOBAL SURVEILLANCE MAP</span><span class="tag">SIMULATION MODE</span></div>
+ <div class="map"><div class="world"></div><div class="scan"></div><div class="ring"></div><div class="cross"></div>
+ <i class="pin" style="left:51%;top:44%"></i><i class="pin" style="left:62%;top:53%;animation-delay:.5s"></i><i class="pin" style="left:38%;top:38%;animation-delay:1s"></i>
+ <div class="maplabel">SAT LINK: DEMO<br>ENCRYPTION: ACTIVE<br>TRACKING: DISABLED</div>
+ <div class="coordinates">SYS.COORD // 00.0000° N<br>FEED // LOCAL SIMULATION<br>UPLINK // STANDBY</div><div class="mapnote">HARİTA GÖRSELİ: TEMSİLİ<br>GERÇEK ZAMANLI TAKİP YOK</div>
+ </div>
+</section>
+<aside class="side">
+ <section class="panel"><div class="panelhead"><span>SYSTEM STATUS</span><span class="tag">NOMINAL</span></div><div class="metrics">
+ <div class="metric"><small>ACTIVE NODES</small><strong>03</strong></div><div class="metric"><small>LIVE TARGETS</small><strong>00</strong></div>
+ <div class="metric"><small>NETWORK</small><strong style="color:var(--green)">READY</strong></div><div class="metric"><small>THREAT LEVEL</small><strong style="color:var(--cyan)">LOW</strong></div>
+ </div></section>
+ <section class="panel"><div class="panelhead"><span>DATABASE LOOKUP</span><span class="tag">LOCAL DEMO</span></div><div class="search"><input id="query" placeholder="Demo kayıt / plaka gir..." maxlength="24"><button onclick="lookup()">SEARCH</button></div><div class="result" id="result">Arama alanı yalnızca örnek arayüzdür; gerçek plaka veya kişi veritabanına bağlı değildir.</div></section>
+ <section class="panel"><div class="panelhead"><span>ACTIVITY LOG</span><span>LAST EVENTS</span></div><div class="events"><div class="event"><i class="dot"></i><div>Interface initialized<span>18:20:04 • LOCAL</span></div></div><div class="event"><i class="dot"></i><div>Radar simulation started<span>18:20:05 • DEMO</span></div></div><div class="event"><i class="dot"></i><div>Secure access layer ready<span>18:20:06 • LOCAL</span></div></div></div></section>
+</aside>
+</main>
+<div class="notice">GÜVENLİK NOTU: Bu herkese açık demo arayüzüdür. Gerçek kişilerin konumunu izleme, gizli kameralara erişme veya resmi plaka/kimlik kayıtlarını sorgulama özelliği içermez. Gerçek konum paylaşımı yalnızca açık rıza veren cihazlarla ve güvenli erişim kontrolüyle eklenebilir.</div>
+<footer>ESC0BAR // GOD'S EYE — CONCEPT DASHBOARD • PUBLIC DEMO</footer>
+<script>
+function lookup(){const q=document.getElementById('query').value.trim();const r=document.getElementById('result');r.textContent=q?`"${q}" için demo araması tamamlandı. Bağlı bir veri kaynağı bulunmuyor.`:"Lütfen bir demo kayıt adı gir."}
+document.getElementById('query').addEventListener('keydown',e=>{if(e.key==='Enter')lookup()});
+</script>
+</body></html>
